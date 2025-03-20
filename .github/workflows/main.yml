@@ -1,4 +1,4 @@
-name: Ejecutar Bot de Telegram
+name: Ejecutar Bot de Telegram gift 
 on:
   workflow_dispatch: # Permite ejecución manual
   schedule:
