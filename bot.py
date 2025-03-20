@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 TOKEN = os.environ.get("BOT_TOKEN")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Bot activo desde GitHub Actions 🚀")
+    await update.message.reply_text("Bot activo desde GitHub Actions 🏖")
 
 if __name__ == "__main__":
     # Configuración correcta para v20.x
