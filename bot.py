@@ -1,12 +1,13 @@
 import os
-from telegram.ext import Updater, CommandHandler
+from telegram import Update
+from telegram.ext import Application, CommandHandler, ContextTypes
 
-def start(update, context):
-    update.message.reply_text('¡Hola! Soy tu bot en GitHub Actions 🚀')
+TOKEN = os.environ.get("BOT_TOKEN")
 
-TOKEN = os.environ["TELEGRAM_TOKEN"]  # Token desde variables de entorno
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text('¡Bot activo desde GitHub Actions!')
 
-updater = Updater(TOKEN)
-updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.start_polling()
-updater.idle()  # Mantiene el bot en ejecución
+if __name__ == "__main__":
+    application = Application.builder().token(TOKEN).build()
+    application.add_handler(CommandHandler("start", start))
+    application.run_polling()
