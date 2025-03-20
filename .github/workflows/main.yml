@@ -1,26 +1,27 @@
 name: Ejecutar Bot de Telegram
 on:
+  workflow_dispatch: # Permite ejecución manual
   schedule:
-    - cron: "0 4 * * *"  # Se ejecuta a las 4 AM UTC (12 AM hora de Cuba UTC-4)
+    - cron: '0 */6 * * *' # Ejecuta cada 6 horas
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
     steps:
-      - name: Descargar código
+      - name: Checkout del código
         uses: actions/checkout@v4
 
-      - name: Configurar Python 3.10
+      - name: Configurar Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.10'
 
       - name: Instalar dependencias
-        run: pip install -r requirements.txt
-
-      - name: Ejecutar bot
-        env:
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         run: |
-          python bot.py &
-          sleep 14400  # 4 horas (14400 segundos)
+          python -m pip install --upgrade pip
+          pip install python-telegram-bot
+
+      - name: Ejecutar Bot
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: python bot.py
