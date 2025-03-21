@@ -2,7 +2,7 @@ name: Ejecutar Bot de Telegram gift
 on:
   workflow_dispatch: # Permite ejecución manual
   schedule:
-    - cron: '0 */6 * * *' # Ejecuta cada 6 horas
+    - cron: '' # Ejecuta cada 6 horas
 
 jobs:
   run-bot:
