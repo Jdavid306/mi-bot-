@@ -1,4 +1,4 @@
-name: Telegram Bot Scheduler
+name: Telegram Bot 
 
 on:
   schedule:
@@ -26,4 +26,4 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run Bot
-      run: python mainbot.py
+      run: python botmain.py
