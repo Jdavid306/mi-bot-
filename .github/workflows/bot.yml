@@ -1,15 +1,14 @@
-name: Telegram Bot 
+name: Telegram Bot Scheduler
 
 on:
   schedule:
-    # Horarios en UTC (Cuba UTC-4)
-    - cron: '0 12,18,0 * * *'  # 8 AM, 2 PM, 8 PM hora de Cuba
+    - cron: '0 12,18,0 * * *'
   workflow_dispatch:
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 300  # 5 horas máximo (para la ventana nocturna)
+    timeout-minutes: 300
 
     steps:
     - name: Checkout code
@@ -26,4 +25,6 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run Bot
+      env:
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
       run: python botmain.py
