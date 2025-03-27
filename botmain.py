@@ -1,7 +1,8 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
+import os
 
-TOKEN = "7792530793:AAFwHoGSsiZ6PNpMXMX85Ag7kJ0xAaphu_0"
+TOKEN = os.getenv("TELEGRAM_TOKEN")
 USUARIOS_PERMITIDOS = {5616748906, 5729631156, 8134739443}
 CLAVES_VALIDAS = {"D122v", "P278v", "L341m"}
 ADMIN_ID = 5616748906
