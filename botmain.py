@@ -8,6 +8,9 @@ CLAVES_VALIDAS = {"D122v", "P278v", "L341m"}
 ADMIN_ID = 5616748906
 
 async def notificar_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if context.user_data.get('modulo_activo'):
+        return
+    
     try:
         user = update.effective_user
         mensaje = update.message.text
@@ -32,7 +35,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id not in USUARIOS_PERMITIDOS:
         return
     
-    await notificar_admin(update, context)
     texto_original = update.message.text.strip()
     estado = context.user_data.get('estado', 'esperando_clave')
 
@@ -41,6 +43,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data.clear()
             context.user_data.update({
                 'estado': 'modulo_activo',
+                'modulo_activo': True,
                 'modulo_actual': 'regalo1'
             })
             context.bot_data['ADMIN_ID'] = ADMIN_ID
