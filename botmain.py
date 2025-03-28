@@ -56,8 +56,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if estado == 'esperando_clave':
         if texto_original in CLAVES_VALIDAS:
             context.user_data.clear()
-            import regalo1
-            await regalo1.iniciar_flujo(update, context)
+            import regalo2
+            await regalo2.iniciar_flujo(update, context)
         else:
             await update.message.reply_text("❌ Clave incorrecta")
     else:
