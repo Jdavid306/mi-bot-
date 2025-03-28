@@ -101,7 +101,7 @@ Un hueso de buitre perforado, hallado en Alemania, es considerado la flauta más
 
 -- La palabra música viene de las musas --
 
-Del griego mousikē (arte de las musas), diosas que inspiraban la creatividad. Curiosamente, en la mitología griega, no había una musa específica para la música. �
+Del griego mousikē (arte de las musas), diosas que inspiraban la creatividad. Curiosamente, en la mitología griega, no había una musa específica para la música. 
 
 -- El instrumento que se toca sin tocarlo --
 
@@ -111,7 +111,7 @@ El theremin, inventado en 1920, se maneja moviendo las manos cerca de sus antena
 
 En la escala cromática occidental, no hay una nota llamada Si sostenido, porque equivale a Do natural. ¡Es un intervalo enarmónico! 🎼🚫
 
--- El piano se llamaba originalmente pianoforte --
+--El piano se llamaba originalmente pianoforte--
 
 Porque podía tocar piano (suave) y forte (fuerte), algo revolucionario en el siglo XVIII. 🎹⚡
 
@@ -121,13 +121,13 @@ Estudios muestran que pequeños errores en una interpretación (un slide en guit
             await update.message.reply_text("¡Vas muy bien! ¿Lista para el último reto? 🔥")
             context.user_data['estado'] = 'transicion_3'
         else:
-            await update.message.reply_text("❌ Respuesta incorrecta. Intenta nuevamente 🔄")
+            await update.message.reply_text("🔄 Respuesta incorrecta. Intenta nuevamente ")
 
     elif estado == 'transicion_3':
         await update.message.reply_text(
             """      ⚙️ Acertijo 3:
 
-Si fuera animal sería una zebra. Si fuera matemática seria 8oct = 5+7. Tengo sol y no luna. Tengo arte de ser arte y dicha de ser....¿Qué o Quién soy? 🎹"""
+Si fuera animal sería una zebra. Si fuera matemática seria 8oct = 5+7. Tengo sol y no luna. Tengo arte de ser arte y dicha de ser....¿Qué o Quién soy? """
         )
         context.user_data['estado'] = 'tercer_acertijo'
 
