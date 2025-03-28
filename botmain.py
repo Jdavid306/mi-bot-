@@ -61,8 +61,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await update.message.reply_text("❌ Clave incorrecta")
     else:
-        import regalo1
-        await regalo1.manejar_flujo(update, context)
+        import regalo2
+        await regalo2.manejar_flujo(update, context)
 
 if __name__ == "__main__":
     app = Application.builder().token(TOKEN).build()
