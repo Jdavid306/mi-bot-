@@ -33,7 +33,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     horarios = (
-        "Ey, hola, este bot funciona en los siguientes horarios (hora de Cuba):\n\n"
+        "Ey, hola, este bot funciona en los siguientes horarios (Funciona cuando le da la gana ):\n\n"
         "• 8:00 AM - 12:00 PM\n"
         "• 2:00 PM - 6:00 PM\n"
         "• 8:00 PM - 1:00 AM"
@@ -50,7 +50,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     estado = context.user_data.get('estado', 'esperando_clave')
 
     if context.user_data.get('tarea_finalizada'):
-        await update.message.reply_text("El bot esta en reparacion, espera a mañana, \n\njorge necesita tiempo")
+        await update.message.reply_text("El bot esta en reparación, espera a mañana, \n\njorge necesita tiempo 🛠️😴😴")
         return
 
     if estado == 'esperando_clave':
