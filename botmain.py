@@ -4,8 +4,7 @@ import os
 
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 USUARIOS_PERMITIDOS = {5616748906, 5729631156, 8134739443}
-CLAVES_VALIDAS = {"D122v", "P278v", "L341m"}
-ADMIN_ID = 5616748906
+CLAVES_VALIDAS = {"Z2013b", "X1314e", "F240e", "H876x", "Y389w", "K580n", "J791s"}
 
 async def notificar_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
@@ -34,7 +33,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     horarios = (
         "Ey, hola, este bot funciona en los siguientes horarios (Funciona cuando le da la gana ):\n\n"
-        "• 8:00 AM - 12:00 PM\n"
+        "• 8:30 AM - 12:00 PM\n"
         "• 2:00 PM - 6:00 PM\n"
         "• 8:00 PM - 1:00 AM"
     )
@@ -56,13 +55,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if estado == 'esperando_clave':
         if texto_original in CLAVES_VALIDAS:
             context.user_data.clear()
-            import regalo2
-            await regalo2.iniciar_flujo(update, context)
+            import regalo1
+            await regalo1.iniciar_flujo(update, context)
         else:
             await update.message.reply_text("❌ Clave incorrecta")
     else:
-        import regalo2
-        await regalo2.manejar_flujo(update, context)
+        import regalo1
+        await regalo1.manejar_flujo(update, context)
 
 if __name__ == "__main__":
     app = Application.builder().token(TOKEN).build()
