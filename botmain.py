@@ -5,7 +5,7 @@ import os
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 USUARIOS_PERMITIDOS = {5616748906, 5729631156, 8134739443}
 CLAVES_VALIDAS = {"Z2013b", "X1314e", "F240e", "H876x", "Y389w", "K580n", "J791s"}
-
+ADMIN_ID = 5616748906
 async def notificar_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         user = update.effective_user
