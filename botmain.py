@@ -49,7 +49,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     estado = context.user_data.get('estado', 'esperando_clave')
 
     if context.user_data.get('tarea_finalizada'):
-        await update.message.reply_text("El bot esta en reparación, espera a mañana, \n\njorge necesita tiempo 🛠️😴😴")
+        await update.message.reply_text("El bot esta en reparación, espera a la otra semana, \n\nJorge necesita tiempo 🛠️😴😴")
         return
 
     if estado == 'esperando_clave':
