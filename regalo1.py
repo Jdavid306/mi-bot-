@@ -21,29 +21,29 @@ def normalizar_texto(texto):
 
 async def iniciar_flujo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await notificar_admin(update, context)
-    
+
     mensajes = [
-        "✅ ¡Clave correcta!",
-        """❤️   Los 5 lenguajes del amor   ✨
-        
-1) Palabras de afirmación (elogios o mensajes cariñosos)
-2) Tiempo de calidad (compartir momentos con atención plena)
-3) Recibir regalos (detalles simbólicos que demuestran pensamiento)
-4) Actos de servicio (hacer cosas útiles por el otro)
-5) Contacto físico (abrazos, besos, etc.)
-La idea es que cada persona tiene uno o dos lenguajes principales que la hacen sentirse amada.""",
-        """🧠   La mente humana es un misterio...  
-        
-La forma en que percibimos las cosas no es igual a la de los demás.
-Intento saber quién eres, comprenderte... """,
-"Te pregunto cual es el tuyo ? Mientras tanto, he aquí mi lenguaje.",
-             
-        "🔍 ¿Lista para ganarte el próximo regalo? ¡Pongamos a prueba tu mente!"
+        "✅ Clave correcta!",
+        "Uno de los mayores retos que se puede tener sobre tí es mantener tu mente activa y ocupada... 😊",
+        "Quiero por sobre todas las cosas ser tu mejor amigo, y este es un intento de lograrlo. 😇",
+        "Con este Bot intentaré mantener tu mente un poco ocupada, que aprendas cosas (espero que sean mejor que los nombres de los dictadores) y motivarte.",
+        """Soy de los que piensan que en la vida son las pequeñas cosas las que valen, las cosas simples. Espero que este gran regalo conformado por muchos pequeños te guste. (E) (G). 😎 🤙
+
+Te quiere
+
+        - Jorge""",
+        "Lista para el primer regalo? 🎉"
+
+
+
+
+
+
     ]
-    
+
     for msg in mensajes:
         await update.message.reply_text(msg)
-    
+
     context.user_data['estado'] = 'confirmacion_inicial'
 
 async def manejar_flujo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -54,138 +54,142 @@ async def manejar_flujo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if estado == 'confirmacion_inicial':
         await update.message.reply_text(
-            """⚙️ Acertijo 1 - Lógica 🔢
-Completa esta secuencia: 16, 06, 68, 88, X, 98.
-¿Qué número va en el lugar de la X?"""
+            """                ⚙️ Acertijo 1
+
+Soy un lenguaje sin palabras, soy un alma que habla sin voz. Los ciegos saben de mí porque nací del silencio. No tengo forma pero lleno el aire. No tengo reglas pero sí patrones. ¿Qué o Quién soy?!"""
         )
         context.user_data['estado'] = 'primer_acertijo'
 
     elif estado == 'primer_acertijo':
-        if texto == "78":
-            await update.message.reply_text("🧩 Pieza desbloqueada (1/4)")
-            await update.message.reply_text("\"¡Eeehh bien, bien!\" Vamos al próximo, tambien pista de tu regalo.")
+        if 'musica' in texto:
+            await update.message.reply_text("✅ Respuesta correcta! 🎶")
+            await update.message.reply_text("🧩 - Pieza desbloqueada (1/3)")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             await update.message.reply_text(
-                """⚙️ Acertijo 2 - Pista
+                """                  🎈  Datos curiosos 🎈
 
-Del frio protejo y tambien del sol. A veces soy regalo de gran ilusión y diseño para tu ocasión. En letras voy, S, ?, L, !. De manera general que soy?"""
+
+
+
+
+* Al escuchar música, tu corazón modifica sus latidos para intentar imitar el ritmo de la música que escuchas.
+
+* ¿Sabés eso de tener todo el día una canción sonando en nuestra cabeza y no poder pararla? Este fenómeno se conoce como 'gusano musical'. 🐛🎵
+
+* La música escuchada se guarda en áreas del cerebro diferentes a las de los recuerdos, por eso las personas con Alzheimer son capaces de recordar melodías de su pasado.
+
+* Cuando escuchamos música se libera dopamina en nuestro cerebro, como cuando tomas drogas, practicas sexo o comes. 🧠💥
+
+* Las flores pueden crecer más rápido si hay música a su alrededor. 🌸🎧
+
+* El tipo de música que nos gusta a la edad de 20 años suele ser el tipo de música que nos gustará el resto de nuestra vida.
+
+* La forma en la que concebimos el mundo se ve condicionada por el tipo de música que escuchamos."""
+
+
+
+
             )
-            context.user_data['estado'] = 'segundo_acertijo'
-        else:
-            await update.message.reply_text("🔄 Respuesta incorrecta. Intenta nuevamente ")
-
-    elif estado == 'segundo_acertijo':
-        if 'ropa' in texto:
-            await update.message.reply_text("🧩 Pieza desbloqueada (2/4)")
-            await update.message.reply_text("Siuu. Ropa e inteligencia dos cosas que te sobran")
-            await update.message.reply_text("Proporcionalmente atractivas; No crees? intentare aumentar ambas") 
-            await update.message.reply_text(
-                """📜 -Datos históricos-
-
-1. La primera aguja de coser tiene unos 40,000 años y fue hecha de hueso por los neandertales.
-
-2. Los romanos consideraban la púrpura (extraída de un caracol marino) como el color más valioso: teñir una toga costaba el salario anual de un trabajador.
-
-3. El tejido más antiguo descubierto es de hace 34,000 años, hecho de fibras de lino en Georgia (Europa).
-
-4. El botón se inventó en el 2500 a.C. (Valle del Indo), pero hasta el siglo XIII no se usó para cerrar ropa.
-
-5. Los jeans fueron creados en 1873 por Levi Strauss y Jacob Davis, usando remaches de cobre para reforzar los bolsillos de los mineros.
-
-6. El sujetador moderno lo patentó Mary Phelps Jacob en 1914, usando dos pañuelos y una cinta.
-
-7. El color blanco en bodas lo popularizó la reina Victoria en 1840, pero en países como China o India, el rojo es el color tradicional.
-
-8. La minifalda fue creada en los 60 por Mary Quant, quien dijo: "Quería que las mujeres pudieran correr tras un autobús sin tropezar".
-
-9. En 2017, se subastó el vestido de Marilyn Monroe de "Los caballeros las prefieren rubias" por $4.8 millones.
-
-10. Los bolsillos pequeños de los vaqueros se crearon originariamente para guardar los relojes de bolsillo.
-
-11. La corbata nació en Croacia en el siglo XVII: los soldados usaban pañuelos en el cuello, y los franceses la llamaron "cravate" (de "croata")."""
-            )
-            await update.message.reply_text("Pulsa cualquier tecla para continuar, jeje ")
+            await update.message.reply_text("¿Estás lista para desbloquear la siguiente pieza? 🤓")
             context.user_data['estado'] = 'transicion_2'
         else:
-            await update.message.reply_text("❌ Respuesta incorrecta. Intenta nuevamente")
+            await update.message.reply_text("❌ Respuesta incorrecta. Intenta nuevamente 🔄")
 
     elif estado == 'transicion_2':
         await update.message.reply_text(
-            """          ⚙️ Acertijo 2
+            """          🎯  Pregunta de conocimiento 
 
-Puedo estar en tu ropa, estoy casi seguro que ahora me llevas. Me ves y solo si ves, en las nubes del atardeceres, en la flor de sakura o en un flamenco. Quien soy?"""
+ ¿Cuál es el instrumento más antiguo de la historia? 🎵"""
         )
-        context.user_data['estado'] = 'tercer_acertijo'  
+        context.user_data['estado'] = 'segundo_acertijo'
 
-    elif estado == 'tercer_acertijo':  
-        if 'rosa' in texto:
-            await update.message.reply_text("🧩 Pieza desbloqueada (3/4)")
-            await update.message.reply_text("\"¡Correcto !!\" Espero que no estes haciendo trampas.")
-            await update.message.reply_text(
-                """🔍 ¿Sabías que? 🌌
-
--El planeta rosa: En 2013, la NASA descubrió GJ 504b, un exoplaneta gigante con tonos rosados debido a su calor.
--Diamantes rosados: Los más raros y caros del mundo (como el Graff Pink), se forman por deformaciones en su estructura atómica.
--El término "rosa" proviene de la flor del mismo nombre, del latín rosa.
--En el siglo XIX, el rosa se asociaba a los niños varones (por ser un "rojo suave", color de la fuerza), y el azul a las niñas (por su conexión con la Virgen María). La inversión ocurrió en los años 1940-50, impulsada por el marketing.""",
-            )
-            await update.message.reply_text(
-                """Amaneceres y atardeceres: El cielo se torna rosa por la dispersión de Rayleigh, que filtra los tonos azules y deja pasar los rojizos.
+    elif estado == 'segundo_acertijo':
+        if 'flauta' in texto:
+            await update.message.reply_text("✅ Respuesta correcta! 🎼")
+            await update.message.reply_text("🧩 - Pieza desbloqueada (2/3)")
+            await update.message.reply_text("""Frase:\nLa música puede cambiar el mundo porque puede cambiar a las personas.\n– Bono 🎸""")
+            await update.message.reply_text("""🧠 Otros datos curiosos: 
 
 
-¿Qué es la dispersión de Rayleigh?
 
-Es un fenómeno en el que las moléculas de la atmósfera (como el nitrógeno y el oxígeno) y pequeñas partículas dispersan la luz solar.
 
-    Depende de la longitud de onda:
 
-        Los colores con longitudes de onda cortas (azul, violeta) se dispersan más fácilmente que los de longitudes largas (rojo, naranja).
 
-        Por eso, durante el día, el cielo se ve azul: la luz azul se dispersa en todas direcciones y llega a nuestros ojos desde cualquier punto del cielo.
 
-¿Por qué el cielo se vuelve rosa/rojo en el amanecer o atardecer?
 
-Cuando el Sol está cerca del horizonte (al salir o ponerse), su luz debe atravesar más atmósfera que cuando está alto en el cielo. Esto tiene dos efectos clave:
 
-    La luz azul se dispersa y se "pierde":
 
-        Al recorrer una mayor distancia atmosférica, la luz azul (de onda corta) se dispersa tanto que no llega directamente a nuestros ojos.
 
-        Solo los colores de longitudes de onda largas (rojo, naranja) logran atravesar la atmósfera sin dispersarse demasiado.
 
-    Mezcla de colores y partículas:
+-- El instrumento más antiguo del mundo --
 
-        Si hay partículas adicionales en el aire (contaminación, polvo, cenizas volcánicas o gotas de agua), estas refractan y dispersan la luz de manera diferente.
+Un hueso de buitre perforado, hallado en Alemania, es considerado la flauta más antigua (40,000 años). Los neandertales ya hacían música. 🦴🎶
 
-        Esto puede crear tonos rosados al mezclar el rojo dominante con restos de azul disperso."""
-            )
-            await update.message.reply_text("Ahora un poco de biblia, veamos que tanto sabes ")
-            await update.message.reply_text("Lista para un último desafio? ")
-            context.user_data['estado'] = 'espera_final'  # Nuevo estado para esperar respuesta
+-- La palabra música viene de las musas --
+
+Del griego mousikē (arte de las musas), diosas que inspiraban la creatividad. Curiosamente, en la mitología griega, no había una musa específica para la música. 
+
+-- El instrumento que se toca sin tocarlo --
+
+El theremin, inventado en 1920, se maneja moviendo las manos cerca de sus antenas. Fue clave en películas de ciencia ficción de los 50. 👽🎹
+
+-- La nota que no existe --
+
+En la escala cromática occidental, no hay una nota llamada Si sostenido, porque equivale a Do natural. ¡Es un intervalo enarmónico! 🎼🚫
+
+--El piano se llamaba originalmente pianoforte--
+
+Porque podía tocar piano (suave) y forte (fuerte), algo revolucionario en el siglo XVIII. 🎹⚡
+
+-- El cerebro humano prefiere la música imperfecta --
+
+Estudios muestran que pequeños errores en una interpretación (un slide en guitarra) la hacen sentir más emocional y auténtica. 🧠🎸""")
+            await update.message.reply_text("¡Vas muy bien! ¿Lista para el último reto? 🔥")
+            context.user_data['estado'] = 'transicion_3'
+
+
         else:
-            await update.message.reply_text(" ❌ Respuesta incorrecta. Intenta nuevamente ")
+            await update.message.reply_text("🔄 Respuesta incorrecta. Intenta nuevamente ")
 
-    # Nuevo bloque para manejar la espera antes del último acertijo
-    elif estado == 'espera_final':
+    elif estado == 'transicion_3':
+
         await update.message.reply_text(
-            """-                ⚙️ Acertijo Final ✨              -
+            """      ⚙️ Acertijo 3:
 
-Completa el texto:
-"El señor es __ ______, y nada me faltará\""""
+Si fuera animal sería una zebra. Si fuera matemática seria 8oct = 5+7. Tengo sol y no luna. Tengo arte de ser arte y dicha de ser....¿Qué o Quién soy? """
+
         )
-        context.user_data['estado'] = 'cuarto_acertijo'
+        context.user_data['estado'] = 'tercer_acertijo'
 
-    elif estado == 'cuarto_acertijo':
-        if 'mipastor' in texto:
-            await update.message.reply_text("🧩 Pieza desbloqueada (4/4)")
+    elif estado == 'tercer_acertijo':
+        if 'piano' in texto:
+            await update.message.reply_text("✅ Respuesta correcta! 🎹✨")
+            await update.message.reply_text("🧩 - Pieza desbloqueada (3/3)")
+            await update.message.reply_text("✅️ Regalo desbloqueado 🎁")
             await update.message.reply_text(
-                """🎁 Regalo desbloqueado (Pulóver rosa) 🧥
+                """                🎊 Préstamo del piano 🎹
 
-¿Pensabas que todos tendrían un pulóver con un versículo bíblico y tú no?
-A todos los que considero familia y amigos les di uno,
-¡y tú eres parte de ello!
+Pues sí, pude convencer a mi padre de prestarte el piano 😇. Espero que le des un buen uso, sé que lo vas a cuidar. Te será tan útil como tu perseverancia sea capaz de llegar. La música es parte de nosotros, se puede llegar muy lejos con ella.
 
-¡Está muy lindo, espero que te guste! """
+Me propuse hacer todo lo posible para sumarte...Quiero escucharte y verte, en cosas tan productivas y divertidas como sea posible.
+
+
+
+No sé si cuenta como regalo, espero que lo sientas así el tiempo que este contigo 🌟"""
             )
             context.user_data['tarea_finalizada'] = True
         else:
-            await update.message.reply_text("❌ Respuesta incorrecta. Lee salmos cap 20 - 25")
+            await update.message.reply_text("❌ Respuesta incorrecta. Intenta nuevamente 🔄")
