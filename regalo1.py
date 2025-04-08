@@ -21,7 +21,9 @@ def normalizar_texto(texto):
 
 async def iniciar_flujo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await notificar_admin(update, context)
-
+    
+    context.user_data['tarea_finalizada'] = True
+    
     mensajes = [
         "✅ Clave correcta!",
         "Uno de los mayores retos que se puede tener sobre tí es mantener tu mente activa y ocupada... 😊",
