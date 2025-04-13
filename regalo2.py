@@ -24,7 +24,7 @@ async def iniciar_flujo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     mensajes = [
         "✅ ¡Clave correcta!",
-        """✨ *Los 5 lenguajes del amor* ✨
+        """✨  Los 5 lenguajes del amor ✨
         
 1) Palabras de afirmación (elogios o mensajes cariñosos),
 2) Tiempo de calidad (compartir momentos con atención plena),
@@ -32,7 +32,7 @@ async def iniciar_flujo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 4) Actos de servicio (hacer cosas útiles por el otro),
 5) Contacto físico (abrazos, besos, etc.).
 La idea es que cada persona tiene uno o dos lenguajes principales que la hacen sentirse amada.""",
-        """🧠 *La mente humana es un misterio...*
+        """🧠 *La mente humana es un misterio...
         
 La forma en que percibimos las cosas no es igual a la de los demás, y en eso se basan los conflictos en las personas.
 Intento saber quién eres, comprenderte... mientras tanto, he aquí mi lenguaje.""",
@@ -56,7 +56,7 @@ async def manejar_flujo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if estado == 'confirmacion_inicial':
         await update.message.reply_text(
-            """⚙️ *Acertijo 1 - Lógica* 🔢
+            """⚙️ Acertijo 1 - Lógica 🔢
 Completa esta secuencia: 16, 06, 68, 88, X, 98.
 ¿Qué número va en el lugar de la X?"""
         )
@@ -67,11 +67,11 @@ Completa esta secuencia: 16, 06, 68, 88, X, 98.
             await update.message.reply_text("🧩 Pieza desbloqueada (1/4)")
             await update.message.reply_text("\"¡Eeehh bien, bien!\" Vamos al próximo, una pista de tu regalo.")
             await update.message.reply_text(
-                """⚙️ *Acertijo 2 - Pista* 🧥
+                """⚙️ Acertijo 2 - Pista 🧥
 Del frío protejo y también del sol.
 A veces soy regalo de gran ilusión,
 soy diseño para tu ocasión.
-En tallas voy: S, M, X, L.
+En Letras voy: S, M, X, L.
 ¿Qué soy en general?"""
             )
             context.user_data['estado'] = 'segundo_acertijo'
@@ -82,7 +82,8 @@ En tallas voy: S, M, X, L.
         if 'ropa' in texto:
             await update.message.reply_text("🧩 Pieza desbloqueada (2/4)")
             await update.message.reply_text(
-                """📜 *Datos históricos* 🕰️
+                """📜 Datos históricos 🕰️
+                
 1. La primera aguja de coser tiene unos 40,000 años y fue hecha de hueso por los neandertales.
 2. Los romanos consideraban la púrpura (extraída de un caracol marino) como el color más valioso: teñir una toga costaba el salario anual de un trabajador.
 3. El tejido más antiguo descubierto es de hace 34,000 años, hecho de fibras de lino en Georgia (Europa).
@@ -110,16 +111,16 @@ En tallas voy: S, M, X, L.
 - El término "rosa" proviene de la flor del mismo nombre, del latín rosa.
 - En el siglo XIX, el rosa se asociaba a los niños varones, y el azul a las niñas. La inversión ocurrió en los años 1940-50.
 
-🌈 *¿Qué es la dispersión de Rayleigh?*
+🌈 ¿Qué es la dispersión de Rayleigh?
 Es un fenómeno en el que las moléculas de la atmósfera y pequeñas partículas dispersan la luz solar.
 
-🌅 *¿Por qué el cielo se vuelve rosa/rojo?*
+🌅 ¿Por qué el cielo se vuelve rosa/rojo?
 - El sol cerca del horizonte: la luz atraviesa más atmósfera
 - La luz azul se dispersa y solo llega el rojo/naranja
 - Partículas adicionales crean tonos rosados"""
             )
             await update.message.reply_text(
-                """⚙️ *Acertijo Final* ✨
+                """⚙️ Acertijo Final ✨
 Completa el texto:
 "El señor es __ ______, y nada me faltará\""""
             )
@@ -131,7 +132,7 @@ Completa el texto:
         if 'mipastor' in texto:
             await update.message.reply_text("🧩 Pieza desbloqueada (4/4)")
             await update.message.reply_text(
-                """🎁 *Regalo desbloqueado (Pulóver rosa)* 🧥
+                """🎁 Regalo desbloqueado (Pulóver rosa) 🧥
 ¿Pensabas que todos tendrían un pulóver con un versículo bíblico y tú no?
 A todos los que considero familia y amigos les dimos uno,
 ¡y tú eres parte de ello!
