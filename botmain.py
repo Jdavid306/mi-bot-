@@ -4,7 +4,7 @@ import os
 
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 USUARIOS_PERMITIDOS = {5616748906, 5729631156, 8134739443}
-CLAVES_VALIDAS = {"Z2013b", "X1314e", "F240e", "H876x", "Y389w", "K580n", "J791s"}
+CLAVES_VALIDAS = {"Z2013b", "X1314e", "F240e", "H876x", "Y389w", "J791s", "L184e", "T678v"}
 ADMIN_ID = 5616748906
 async def notificar_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
@@ -23,7 +23,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     await notificar_admin(update, context)
-    await update.message.reply_text("¡Hola!  ¿Quieres un regalo?  🎁  ¡Ingresa una clave!")
+    await update.message.reply_text("¡Hola!  ¿Quieres un regalo?  🎁  ¡Ingresa una clave! 2")
     context.user_data.clear()
     context.user_data['estado'] = 'esperando_clave'
 
@@ -55,13 +55,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if estado == 'esperando_clave':
         if texto_original in CLAVES_VALIDAS:
             context.user_data.clear()
-            import regalo1
-            await regalo1.iniciar_flujo(update, context)
+            import regalo2
+            await regalo2.iniciar_flujo(update, context)
         else:
             await update.message.reply_text("❌ Clave incorrecta")
     else:
-        import regalo1
-        await regalo1.manejar_flujo(update, context)
+        import regalo2
+        await regalo2.manejar_flujo(update, context)
 
 if __name__ == "__main__":
     app = Application.builder().token(TOKEN).build()
