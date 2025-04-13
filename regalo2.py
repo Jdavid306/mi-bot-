@@ -36,7 +36,7 @@ La idea es que cada persona tiene uno o dos lenguajes principales que la hacen s
         
 La forma en que percibimos las cosas no es igual a la de los demás.
 Intento saber quién eres, comprenderte... """,
-"Te pregunto cual es el tuyo ? Mientras tanto, he aquí mi lenguaje.",
+"Te pregunto cuál es el tuyo ? Mientras tanto, he aquí mi lenguaje.",
              
         "🔍 ¿Lista para ganarte el próximo regalo? ¡Pongamos a prueba tu mente!"
     ]
