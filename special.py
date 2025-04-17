@@ -65,13 +65,13 @@ RIDDLES = [
         ]
     },
     {
-        'pregunta': "🧮 ¿Qué 3 números dan el mismo resultado cuando se multiplican y se suman? (Respuesta de los números de menor a mayor seprados por espacio)",
+        'pregunta': "🧮 ¿Qué 3 números dan el mismo resultado cuando se multiplican y se suman? /n(Respuesta de los números de menor a mayor seprados por espacio)",
         'respuesta': "1 2 3", 
         'mensajes': [
             "🧠 ¡Correcto! Oye, no sé cómo lo hiciste, a mí me costó",
             "✅ 6/7 completado",
             "🤝 ERES: - MI AMIGA -",
-            "💖 (...) Nadie es más sexy y deseable que tú...\nVienes en combo como esa amiga que estará ahí y aunque no me entiendas como quisiera, lo haces más que nadie. (...)"
+            "💖 (...) y da igual lo que seamos, te tendré como esa amiga a la que le podre compartir mis cosas.(...)/n(...) Vienes en combo como esa amiga que estará ahí y aunque no me entiendas como quisiera, lo haces más que nadie.(...)"
         ]
     },
     {
