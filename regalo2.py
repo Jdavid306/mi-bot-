@@ -158,6 +158,25 @@ Cuando el Sol está cerca del horizonte (al salir o ponerse), su luz debe atrave
 
         Esto puede crear tonos rosados al mezclar el rojo dominante con restos de azul disperso."""
             )
+            await update.message.reply_text("""Los flamencos son rosados debido a su dieta, específicamente por los carotenoides, pigmentos naturales presentes en los alimentos que consumen. Aquí está la explicación detallada:
+
+    Fuente de los pigmentos:
+    Los flamencos se alimentan principalmente de organismos acuáticos como artemias (camarones de salmuera), algas azul-verdosas y pequeños crustáceos. Estos organismos contienen carotenoides, como la astaxantina, un pigmento rojizo-anaranjado.
+
+    Metabolismo de los carotenoides:
+    Los carotenoides son procesados por el hígado del flamenco, donde se descomponen en pigmentos (como la cantaxantina). Estos pigmentos se depositan en las plumas, la piel y el pico, otorgando el color rosado característico. Sin esta dieta, los flamencos serían blancos o grises.
+
+    Desarrollo del color:
+
+        Las crías de flamenco nacen grises o blancas y adquieren su tono rosado gradualmente al comenzar a consumir alimentos ricos en carotenoides.
+
+        La intensidad del color varía según la especie y la disponibilidad de estos pigmentos en su hábitat. Por ejemplo, los flamencos del Caribe suelen ser más vibrantes que otras especies.
+
+    Función biológica y social:
+
+        El color rosado actúa como un indicador de salud: un tono más intenso sugiere una dieta nutritiva y un individuo más atractivo para la reproducción.
+
+        En cautiverio, si su alimentación carece de carotenoides, se les suplementa con pigmentos para mantener su coloración. """)
             await update.message.reply_text("Ahora un poco de biblia, veamos que tanto sabes ")
             await update.message.reply_text("Lista para un último desafio? ")
             context.user_data['estado'] = 'espera_final'  # Nuevo estado para esperar respuesta
