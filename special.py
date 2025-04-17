@@ -65,13 +65,13 @@ RIDDLES = [
         ]
     },
     {
-        'pregunta': "🧮 ¿Qué 3 números dan el mismo resultado cuando se multiplican y se suman? /n(Respuesta de los números de menor a mayor seprados por espacio)",
+        'pregunta': "🧮 ¿Qué 3 números dan el mismo resultado cuando se multiplican y se suman? \n(Respuesta de los números de menor a mayor seprados por espacio)",
         'respuesta': "1 2 3", 
         'mensajes': [
             "🧠 ¡Correcto! Oye, no sé cómo lo hiciste, a mí me costó",
             "✅ 6/7 completado",
             "🤝 ERES: - MI AMIGA -",
-            "💖 (...) y da igual lo que seamos, te tendré como esa amiga a la que le podre compartir mis cosas.(...)/n(...) Vienes en combo como esa amiga que estará ahí y aunque no me entiendas como quisiera, lo haces más que nadie.(...)"
+            "💖 (...) y da igual lo que seamos, te tendré como esa amiga a la que le podre compartir mis cosas.(...)\n(...) Vienes en combo como esa amiga que estará ahí y aunque no me entiendas como quisiera, lo haces más que nadie.(...)"
         ]
     },
     {
@@ -101,7 +101,7 @@ FINAL_MESSAGES = [
     "Estos mensajes no iban aquí, pero quiero regalarte un poco de contexto jeje. Al final esto se trata de eso, de regalos.",
     "Por eso pienso profundamente que el amor es más que un sentimiento. Da igual lo que siento ahora, es la decisión de darte este regalo en forma de notas, en cosas que te seran útiles...",
     "🎉 El regalo es......",
-    "📱 ¡UN REGALO SORPRESA!* Tu me haces sufrir y yo te lo devuelvo ",
+    "📱 ¡UN REGALO SORPRESA! Tu me haces sufrir y yo te lo devuelvo ",
     " Te llegará un mensaje pronto en tu móvil, entonces lo sabrás. Saludos.",
     """ Te quiero Mi...     
       
