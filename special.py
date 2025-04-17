@@ -10,7 +10,7 @@ ADMIN_ID = 5616748906
 VALID_KEYS = [
     'sueños', 'amor', 'libro', 'corazon', 'vida', 
     'deciciones', 'quiero', 'estraño', 'canciones', 
-    'musica', 'cicatrices', 'abrazos', 'luna', 'colores', 'iris', 'lirio', 'nota', 'tiempo'
+    'musica', 'cicatrices', 'abrazos', 'luna', 'colores', 'iris', 'lirio', 'nota', 'tiempo', 'colores', 'Un cuarto en la uci', 'pan con croquetas', 'guapisexy'   
 ]
 
 RIDDLES = [
@@ -35,7 +35,7 @@ RIDDLES = [
         ]
     },
     {
-        'pregunta': "🔢 Tenemos esta secuencia: 1, 1, 2, 3, 5, 3, 8, 1. ¿Qué número sigue?",
+        'pregunta': "Tenemos esta secuencia: 1, 1, 2, 3, 5, 3, 8, 1. ¿Qué número sigue? 🔢 ",
         'respuesta': "9",
         'mensajes': [
             "🤖 ¡Correcto! Es que has programado, imagínate",
@@ -82,10 +82,10 @@ RIDDLES = [
             "✅ 7/7 completado",
             "💫 ERES: - PEQUEÑA -",
             """💌 (...) Te lo pido de favor, nunca dejes de ser quien eres, nunca dejes de ser la niña pequeña que puede soñar y conseguirlo. Los años jamás pasarán sobre tí, y siempre serás joven.(...) 
-(...)  me encanta todos esos cachetes pelliscables, por tu increíble personalidad, y la manera que eres una niña pequeña dentro de un adulto responsable. Eres todo ternura y perversidad en un mismo frasco..(...) 
-(...)  No es justo que cada vez te abrace puedas sentir mi corazón y yo no el tuyo... PD: es que eres pequeña y me das por el pecho (...) 
-(...)  Un beso, tu pequeña 🤍 (...) 
-(...)  No sabia lo pequeña que era su cuerpo, y lo bien que quedaba alado de mi pecho, y lo bien que se juntan las piernas. Su calidez era impresionante, y estaba tan perfectamente ahí, que es como si toda mi vida hubiera esperado ese momento..(...)"""
+(...)  me encanta todos esos cachetes pelliscables, por tu increíble personalidad, y la manera que eres una niña pequeña dentro de un adulto responsable. Eres todo ternura y perversidad en un mismo frasco..
+(...)  No es justo que cada vez te abrace puedas sentir mi corazón y yo no el tuyo... PD: es que eres pequeña y me das por el pecho 
+(...)  Un beso, tu pequeña 🤍 
+(...)  No sabia lo pequeña que era su cuerpo, y lo bien que quedaba alado de mi pecho, y lo bien que se juntan las piernas. Su calidez era impresionante, y estaba tan perfectamente ahí, que es como si toda mi vida hubiera esperado ese momento(...)"""
         ]
     }
 ]
@@ -144,9 +144,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "⏳ Durante las próximas 48h el modo especial estará activo",
         "🔑 No existen claves alfanuméricas, solo palabras...",
         "\n💞 Encuentra las palabras que nos unen, que compartimos",
-        "🎁 Al final tendrás un regalo especial, solo si eres capaz de controlarlas 😉",
-        "💡 ¿Estás lista para este desafío?! En cuanto des aceptar tendrás 48h para completarlo"
-    ]
+        "🎁 Al final tendrás un regalo especial, solo si eres capaz de pensarlas 😉",
+        "💡 ¿Estás lista para este desafío?! En cuanto aceptes tendrás 48h para completarlo"
+
     
     for mensaje in mensajes:
         await update.message.reply_text(mensaje)
