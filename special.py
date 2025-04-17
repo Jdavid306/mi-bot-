@@ -10,7 +10,7 @@ ADMIN_ID = 5616748906
 VALID_KEYS = [
     'sueños', 'amor', 'libro', 'corazon', 'vida', 
     'deciciones', 'quiero', 'estraño', 'canciones', 
-    'musica', 'cicatrices', 'abrazos', 'luna', 'colores', 'iris', 'lirio', 'nota', 'tiempo', 'colores', 'Un cuarto en la uci', 'pan con croquetas', 'guapisexy'   
+    'musica', 'cicatrices', 'abrazos', 'luna', 'colores', 'iris', 'lirio', 'nota', 'tiempo', 'colores', 'Un cuarto en la uci', 'pan con croquetas', 'guapisexy',
 ]
 
 RIDDLES = [
