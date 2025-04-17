@@ -10,7 +10,9 @@ ADMIN_ID = 5616748906
 VALID_KEYS = [
     'sueños', 'amor', 'libro', 'corazon', 'vida', 
     'deciciones', 'quiero', 'estraño', 'canciones', 
-    'musica', 'cicatrices', 'abrazos', 'luna', 'colores', 'iris', 'lirio', 'nota', 'tiempo', 'colores', 'Un cuarto en la uci', 'pan con croquetas', 'guapisexy'
+    'musica', 'cicatrices', 'abrazos', 'luna', 'colores', 
+    'iris', 'lirio', 'nota', 'tiempo', 'colores', 'Un cuarto en la uci', 'pan con croquetas', 'guapisexy',
+    'admiro'
 ]
 
 RIDDLES = [
@@ -103,9 +105,9 @@ FINAL_MESSAGES = [
     "🎉 El regalo es......",
     "📱 ¡UN REGALO SORPRESA! Tu me haces sufrir y yo te lo devuelvo ",
     " Te llegará un mensaje pronto en tu móvil, entonces lo sabrás. Saludos.",
-    """ Te quiero Mi...     
+    """ Te quiero Mi... 🤍     
       
-                  guapisexy  😇"""
+                  Guapisexy  😇"""
 ]
 
 def normalizar(texto):
@@ -157,6 +159,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         'found_keys': []
     })
 
+async def modo_completado(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("🎉 ¡Felicidades por completar el modo especial! 🏆 Pronto habrá un próximo desafío... ")
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id not in USUARIOS_PERMITIDOS:
         return
@@ -186,6 +191,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 for mensaje in FINAL_MESSAGES:
                     await update.message.reply_text(mensaje)
                 context.user_data.clear()
+                await modo_completado(update, context)
             else:
                 await update.message.reply_text(
                     f"💬 ¿Lista para el próximo? Ingresa una palabra clave 🔑"
