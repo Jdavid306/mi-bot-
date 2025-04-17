@@ -55,7 +55,7 @@ RIDDLES = [
         ]
     },
     {
-        'pregunta': "🐱 Cuatro gatos en un cuarto,\ncada gato en un rincón,\ncada gato ve tres gatos,\n¿Adivina cuántos gatos son?(Respusta en número) ",
+        'pregunta': "🐱 Cuatro gatos en un cuarto,\ncada gato en un rincón,\ncada gato ve tres gatos,\n¿Adivina cuántos gatos son?\n(Respuesta en número) ",
         'respuesta': "4", 
         'mensajes': [
             "😼 ¡Correcto! Venga este ni vale",
@@ -65,7 +65,7 @@ RIDDLES = [
         ]
     },
     {
-        'pregunta': "🧮 ¿Qué 3 números dan el mismo resultado cuando se multiplican y se suman? (Respusta de los números de menor a mayor seprados por espacio)",
+        'pregunta': "🧮 ¿Qué 3 números dan el mismo resultado cuando se multiplican y se suman? (Respuesta de los números de menor a mayor seprados por espacio)",
         'respuesta': "1 2 3", 
         'mensajes': [
             "🧠 ¡Correcto! Oye, no sé cómo lo hiciste, a mí me costó",
@@ -75,7 +75,7 @@ RIDDLES = [
         ]
     },
     {
-        'pregunta': "🚖 En el taxi en el que yo entré había 3 pasajeros. Poco después, 2 personas bajaron y 1 entró.\n¿Cuántas personas hay ahora?(Respusta en número) ",
+        'pregunta': "🚖 En el taxi en el que yo entré había 3 pasajeros. Poco después, 2 personas bajaron y 1 entró.\n¿Cuántas personas hay ahora?(Respuesta en número) ",
         'respuesta': "4",
         'mensajes': [
             "🎯 ¡Correcto! Había 5 personas: 3 pasajeros, 1 conductor y yo.\nLuego se bajaron 2 y subió 1 = 4",
@@ -145,7 +145,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "🔑 No existen claves alfanuméricas, solo palabras...",
         "\n💞 Encuentra las palabras que nos unen, que compartimos",
         "🎁 Al final tendrás un regalo especial, solo si eres capaz de controlarlas 😉",
-        "💡 ¿Estás lista para este desafío?! En cuanto des aceptar tendrás 72h para completarlo"
+        "💡 ¿Estás lista para este desafío?! En cuanto des aceptar tendrás 48h para completarlo"
     ]
     
     for mensaje in mensajes:
