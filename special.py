@@ -107,7 +107,7 @@ FINAL_MESSAGES = [
     " Te llegará un mensaje pronto en tu móvil, entonces lo sabrás. Saludos.",
     """ Te quiero Mi... 🤍     
       
-                  Guapisexy  😇"""
+                  guapisexy  😇"""
 ]
 
 def normalizar(texto):
@@ -156,10 +156,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data.update({
         'esperando_confirmacion': True,
         'progress': 0,
-        'found_keys': []
+        'found_keys': [],
+        'modo_completado': False
     })
 
 async def modo_completado(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    context.user_data['modo_completado'] = True
     await update.message.reply_text("🎉 ¡Felicidades por completar el modo especial! 🏆 Pronto habrá un próximo desafío... ")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -170,6 +172,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     user_data = context.user_data
     texto = update.message.text
+
+    # Verificar si el modo ya fue completado
+    if user_data.get('modo_completado'):
+        await modo_completado(update, context)
+        return
 
     if user_data.get('esperando_confirmacion'):
         await update.message.reply_text("📜 Querías una lista de todo lo que te he dicho que eres...\n✨ Por cada acertijo completado tendrás una\n\n💡 PD: Todas son sacadas de las notas")
@@ -190,7 +197,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if user_data['progress'] == 7:
                 for mensaje in FINAL_MESSAGES:
                     await update.message.reply_text(mensaje)
-                context.user_data.clear()
                 await modo_completado(update, context)
             else:
                 await update.message.reply_text(
