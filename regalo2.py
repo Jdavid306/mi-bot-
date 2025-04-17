@@ -129,7 +129,7 @@ Puedo estar en tu ropa, estoy casi seguro que ahora me llevas. Me ves y solo si 
 -En el siglo XIX, el rosa se asociaba a los niños varones (por ser un "rojo suave", color de la fuerza), y el azul a las niñas (por su conexión con la Virgen María). La inversión ocurrió en los años 1940-50, impulsada por el marketing.""",
             )
             await update.message.reply_text(
-                """Amaneceres y atardeceres: El cielo se torna rosa por la dispersión de Rayleigh, que filtra los tonos azules y deja pasar los rojizos.
+                """ 🌅 Amaneceres y atardeceres: El cielo se torna rosa por la dispersión de Rayleigh, que filtra los tonos azules y deja pasar los rojizos. 🌄
 
 
 ¿Qué es la dispersión de Rayleigh?
@@ -158,12 +158,12 @@ Cuando el Sol está cerca del horizonte (al salir o ponerse), su luz debe atrave
 
         Esto puede crear tonos rosados al mezclar el rojo dominante con restos de azul disperso."""
             )
-            await update.message.reply_text("""Los flamencos son rosados debido a su dieta, específicamente por los carotenoides, pigmentos naturales presentes en los alimentos que consumen. Aquí está la explicación detallada:
+            await update.message.reply_text(""" 🦩 Los flamencos son rosados debido a su dieta, específicamente por los carotenoides, pigmentos naturales presentes en los alimentos que consumen. Aquí está la explicación detallada:
 
-    Fuente de los pigmentos:
+      Fuente de los pigmentos:
     Los flamencos se alimentan principalmente de organismos acuáticos como artemias (camarones de salmuera), algas azul-verdosas y pequeños crustáceos. Estos organismos contienen carotenoides, como la astaxantina, un pigmento rojizo-anaranjado.
 
-    Metabolismo de los carotenoides:
+      Metabolismo de los carotenoides:
     Los carotenoides son procesados por el hígado del flamenco, donde se descomponen en pigmentos (como la cantaxantina). Estos pigmentos se depositan en las plumas, la piel y el pico, otorgando el color rosado característico. Sin esta dieta, los flamencos serían blancos o grises.
 
     Desarrollo del color:
@@ -177,8 +177,8 @@ Cuando el Sol está cerca del horizonte (al salir o ponerse), su luz debe atrave
         El color rosado actúa como un indicador de salud: un tono más intenso sugiere una dieta nutritiva y un individuo más atractivo para la reproducción.
 
         En cautiverio, si su alimentación carece de carotenoides, se les suplementa con pigmentos para mantener su coloración. """)
-            await update.message.reply_text("Ahora un poco de biblia, veamos que tanto sabes ")
-            await update.message.reply_text("Lista para un último desafio? ")
+            await update.message.reply_text("- 📖 Ahora un poco de biblia, veamos que tanto sabes ")
+            await update.message.reply_text("Lista para un último desafio? 🔥")
             context.user_data['estado'] = 'espera_final'  # Nuevo estado para esperar respuesta
         else:
             await update.message.reply_text(" ❌ Respuesta incorrecta. Intenta nuevamente ")
