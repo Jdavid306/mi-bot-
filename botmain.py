@@ -18,7 +18,7 @@ flask_app = Flask(__name__)
 def health_check():
     """Endpoint de salud para UptimeRobot"""
     if dentro_de_horario():
-        return "OK ❤️", 200
+        return "OK", 200
     return "Fuera de horario ⏰", 503
 
 def dentro_de_horario():
@@ -48,7 +48,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     await notificar_admin(update, context)
-    await update.message.reply_text("¡Hola!  ¿Quieres un regalo?  🎁  ¡Ingresa una clave! 2")
+    await update.message.reply_text("¡Hola!  ¿Quieres un regalo?  🎁  ¡Ingresa una clave! >")
     context.user_data.clear()
     context.user_data['estado'] = 'esperando_clave'
 
