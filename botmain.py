@@ -23,7 +23,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     await notificar_admin(update, context)
-    await update.message.reply_text("¡Hola!  ¿Quieres un regalo?  🎁  ¡Ingresa una clave! 2")
+    await update.message.reply_text("¡Hola!  ¿Quieres un regalo?  🎁  ¡Ingresa una clave! 3")
     context.user_data.clear()
     context.user_data['estado'] = 'esperando_clave'
 
@@ -33,9 +33,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     horarios = (
         "Ey, hola, este bot funciona en los siguientes horarios (Funciona cuando le da la gana ):\n\n"
-        "• 8:30 AM - 12:00 PM\n"
-        "• 2:00 PM - 6:00 PM\n"
-        "• 8:00 PM - 1:00 AM"
+      
     )
     await update.message.reply_text(horarios)
 
