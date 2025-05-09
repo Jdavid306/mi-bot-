@@ -5,13 +5,15 @@ from flask import Flask
 from threading import Thread
 import time
 import logging
-import sys
+import requests
 
 # Configuración básica
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 USUARIOS_PERMITIDOS = {5616748906, 5729631156, 8134739443}
 CLAVES_VALIDAS = {"Z2013b", "X1314e", "F240e", "H876x", "Y389w", "J791s", "L184e", "T678v"}
 ADMIN_ID = 5616748906
+SERVICE_ID = "https://dashboard.render.com/web/srv-d0egh3k9c44c7382kbug"  # Reemplázalo
+API_TOKEN = "rnd_Rcp5K3Bt3UVvNsE9zqVhH3Xfeuzh"   # Crea uno en Account Settings > API Tokens
 
 # Configuración de logs
 logging.basicConfig(
@@ -25,18 +27,25 @@ flask_app = Flask(__name__)
 
 @flask_app.route('/')
 def health_check():
-    """Endpoint básico para mantener el servicio activo"""
+    """Endpoint básico para health checks"""
     return "OK", 200
 
 def run_flask():
     """Inicia Flask en segundo plano"""
     flask_app.run(host='0.0.0.0', port=8080)
 
-# Función para reiniciar el bot
-def reiniciar_bot():
-    """Reinicia el proceso actual"""
-    python = sys.executable
-    os.execl(python, python, *sys.argv)
+def verificar_estado_render():
+    """Verifica si el servicio está realmente activo en Render"""
+    try:
+        response = requests.get(
+            f"https://api.render.com/v1/services/{SERVICE_ID}",
+            headers={"Authorization": f"Bearer {API_TOKEN}"},
+            timeout=5
+        )
+        return response.json().get("service", {}).get("status") == "live"
+    except Exception as e:
+        logger.error(f"Error verificando estado: {e}")
+        return False
 
 # Handlers originales (sin cambios)
 async def notificar_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -59,12 +68,18 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id not in USUARIOS_PERMITIDOS:
         return
-    horarios = "Ey, hola, este bot funciona en los siguientes horarios:\n\n• 8:30 AM - 12:00 PM\n• 2:00 PM - 6:00 PM\n• 8:00 PM - 1:00 AM"
+    horarios = (
+        "Ey, hola, este bot funciona en los siguientes horarios:\n\n"
+        "• 8:30 AM - 12:00 PM\n"
+        "• 2:00 PM - 6:00 PM\n"
+        "• 8:00 PM - 1:00 AM"
+    )
     await update.message.reply_text(horarios)
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id not in USUARIOS_PERMITIDOS:
         return
+    
     await notificar_admin(update, context)
     
     texto_original = update.message.text.strip()
@@ -85,10 +100,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         import regalo2
         await regalo2.manejar_flujo(update, context)
 
-def main():
-    """Función principal con autoreconexión mejorada"""
+def iniciar_bot():
+    """Función para iniciar el bot con verificación de estado"""
     while True:
         try:
+            # Espera hasta que Render esté completamente activo
+            while not verificar_estado_render():
+                logger.info("Esperando activación completa del servicio...")
+                time.sleep(10)
+            
             # Inicia Flask en segundo plano
             flask_thread = Thread(target=run_flask)
             flask_thread.daemon = True
@@ -100,13 +120,12 @@ def main():
             app.add_handler(CommandHandler("info", info))
             app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
             
-            logger.info("Bot iniciado correctamente")
+            logger.info("✅ Bot iniciado correctamente")
             app.run_polling()
-            
+
         except Exception as e:
             logger.error(f"Error crítico: {e}. Reiniciando en 30 segundos...")
             time.sleep(30)
-            reiniciar_bot()
 
 if __name__ == "__main__":
-    main()
+    iniciar_bot()
