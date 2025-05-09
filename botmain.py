@@ -1,92 +1,83 @@
-from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 import os
-from flask import Flask
-from threading import Thread
+import sys
+import signal
 import time
 import logging
-import requests
+from threading import Thread
+from telegram import Update
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    MessageHandler,
+    ContextTypes,
+    filters
+)
 
-# Configuración básica
+# --- Configuración Básica ---
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 USUARIOS_PERMITIDOS = {5616748906, 5729631156, 8134739443}
 CLAVES_VALIDAS = {"Z2013b", "X1314e", "F240e", "H876x", "Y389w", "J791s", "L184e", "T678v"}
 ADMIN_ID = 5616748906
-SERVICE_ID = "https://dashboard.render.com/web/srv-d0egh3k9c44c7382kbug"  # Reemplázalo
-API_TOKEN = "rnd_Rcp5K3Bt3UVvNsE9zqVhH3Xfeuzh"   # Crea uno en Account Settings > API Tokens
 
-# Configuración de logs
+# --- Configuración de Logs Mejorada ---
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
+    level=logging.INFO,
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('bot_runtime.log')
+    ]
 )
 logger = logging.getLogger(__name__)
 
-# Servidor Flask mínimo
-flask_app = Flask(__name__)
+# --- Estado Global del Bot ---
+class BotState:
+    active = False
+    restarting = False
 
-@flask_app.route('/')
-def health_check():
-    """Endpoint básico para health checks"""
-    return "OK", 200
+# --- Manejadores de Señales ---
+def handle_sigterm(signum, frame):
+    """Maneja el cierre limpio del servicio"""
+    logger.info("Recibida señal de terminación, cerrando limpiamente...")
+    BotState.active = False
+    sys.exit(0)
 
-def run_flask():
-    """Inicia Flask en segundo plano"""
-    flask_app.run(host='0.0.0.0', port=8080)
+signal.signal(signal.SIGTERM, handle_sigterm)
 
-def verificar_estado_render():
-    """Verifica si el servicio está realmente activo en Render"""
-    try:
-        response = requests.get(
-            f"https://api.render.com/v1/services/{SERVICE_ID}",
-            headers={"Authorization": f"Bearer {API_TOKEN}"},
-            timeout=5
-        )
-        return response.json().get("service", {}).get("status") == "live"
-    except Exception as e:
-        logger.error(f"Error verificando estado: {e}")
-        return False
+# --- Función de Reinicio Completo ---
+def full_restart():
+    """Reinicia completamente el proceso Python"""
+    logger.warning("Iniciando reinicio completo...")
+    python = sys.executable
+    os.execl(python, python, *sys.argv)
 
-# Handlers originales (sin cambios)
-async def notificar_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    try:
-        user = update.effective_user
-        mensaje = update.message.text
-        reporte = f"📩 Mensaje de < {user.full_name} >\n\n📝 {mensaje}"
-        await context.bot.send_message(chat_id=ADMIN_ID, text=reporte)
-    except Exception as e:
-        logger.error(f"Error en notificación: {e}")
-
+# --- Core del Bot ---
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Manejador del comando /start"""
     if update.effective_user.id not in USUARIOS_PERMITIDOS:
         return
-    await notificar_admin(update, context)
-    await update.message.reply_text("¡Hola! ¿Quieres un regalo? 🎁 ¡Ingresa una clave! >")
-    context.user_data.clear()
-    context.user_data['estado'] = 'esperando_clave'
-
-async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_user.id not in USUARIOS_PERMITIDOS:
+    
+    if not BotState.active:
+        await update.message.reply_text("🔄 El bot se está iniciando, por favor espera...")
         return
-    horarios = (
-        "Ey, hola, este bot funciona en los siguientes horarios:\n\n"
-        "• 8:30 AM - 12:00 PM\n"
-        "• 2:00 PM - 6:00 PM\n"
-        "• 8:00 PM - 1:00 AM"
-    )
-    await update.message.reply_text(horarios)
+    
+    await update.message.reply_text("¡Bot activado correctamente! 🚀")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Manejador principal de mensajes"""
+    if not BotState.active:
+        await update.message.reply_text("⏳ El bot está en proceso de activación...")
+        return
+        
     if update.effective_user.id not in USUARIOS_PERMITIDOS:
         return
-    
-    await notificar_admin(update, context)
-    
+
+    # --- Tu lógica original aquí ---
     texto_original = update.message.text.strip()
     estado = context.user_data.get('estado', 'esperando_clave')
 
     if context.user_data.get('tarea_finalizada'):
-        await update.message.reply_text("El bot está en reparación, espera a la otra semana.\n\nJorge necesita tiempo 🛠️😴😴")
+        await update.message.reply_text("🔧 Bot en mantenimiento, vuelve pronto")
         return
 
     if estado == 'esperando_clave':
@@ -100,32 +91,50 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         import regalo2
         await regalo2.manejar_flujo(update, context)
 
-def iniciar_bot():
-    """Función para iniciar el bot con verificación de estado"""
+# --- Sistema de Autoreparación ---
+def health_monitor():
+    """Hilo que monitorea y repara el bot automáticamente"""
     while True:
-        try:
-            # Espera hasta que Render esté completamente activo
-            while not verificar_estado_render():
-                logger.info("Esperando activación completa del servicio...")
-                time.sleep(10)
-            
-            # Inicia Flask en segundo plano
-            flask_thread = Thread(target=run_flask)
-            flask_thread.daemon = True
-            flask_thread.start()
+        time.sleep(30)
+        
+        if not BotState.active and not BotState.restarting:
+            logger.error("Bot inactivo detectado - Forzando reinicio...")
+            BotState.restarting = True
+            full_restart()
 
-            # Inicia el bot de Telegram
+def run_bot():
+    """Inicia y mantiene el bot en ejecución"""
+    retries = 0
+    max_retries = 3
+    
+    while retries < max_retries:
+        try:
+            # Configuración de la aplicación
             app = Application.builder().token(TOKEN).build()
+            
+            # Registro de handlers
             app.add_handler(CommandHandler("start", start))
-            app.add_handler(CommandHandler("info", info))
             app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
             
-            logger.info("✅ Bot iniciado correctamente")
+            # Inicio del bot
+            logger.info("🚀 Iniciando bot de Telegram...")
+            BotState.active = True
+            BotState.restarting = False
             app.run_polling()
-
+            
         except Exception as e:
-            logger.error(f"Error crítico: {e}. Reiniciando en 30 segundos...")
-            time.sleep(30)
+            logger.error(f"Error crítico: {str(e)}")
+            BotState.active = False
+            retries += 1
+            time.sleep(10 if retries < max_retries else 30)
+    
+    # Si supera los reintentos, reinicio completo
+    full_restart()
 
+# --- Punto de Entrada Principal ---
 if __name__ == "__main__":
-    iniciar_bot()
+    # Iniciar monitor de salud
+    Thread(target=health_monitor, daemon=True).start()
+    
+    # Iniciar bot principal
+    run_bot()
