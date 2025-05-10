@@ -6,6 +6,7 @@ from threading import Thread
 from datetime import datetime
 import logging
 import asyncio
+import time
 
 # Configuración de logging
 logging.basicConfig(
@@ -36,9 +37,10 @@ def ping():
 
 def run_flask():
     from waitress import serve
+    logger.info(f"Iniciando servidor Flask en puerto {PORT}")
     serve(flask_app, host="0.0.0.0", port=PORT)
 
-# Funciones del bot
+# Funciones del bot (manteniendo tu lógica original)
 async def notificar_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         user = update.effective_user
@@ -92,42 +94,43 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         import regalo2
         await regalo2.manejar_flujo(update, context)
 
-async def reset_telegram_connection():
-    """Reinicia la conexión con Telegram"""
-    bot = Bot(token=TOKEN)
-    try:
-        await bot.delete_webhook(drop_pending_updates=True)
-        await bot.close()
-        logger.info("Conexión con Telegram reiniciada correctamente")
-    except Exception as e:
-        logger.error(f"Error reiniciando conexión: {e}")
-
 async def run_bot():
-    """Función principal con autoreconexión"""
+    """Función principal mejorada para manejo de conexiones"""
     while True:
         try:
-            await reset_telegram_connection()
+            # Configuración inicial limpia
+            application = Application.builder().token(TOKEN).build()
             
-            app = Application.builder().token(TOKEN).build()
-            app.add_handler(CommandHandler("start", start))
-            app.add_handler(CommandHandler("info", info))
-            app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+            # Registro de handlers
+            application.add_handler(CommandHandler("start", start))
+            application.add_handler(CommandHandler("info", info))
+            application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
             
-            logger.info("Iniciando bot...")
-            await app.run_polling(drop_pending_updates=True)
+            # Limpieza inicial
+            bot = Bot(TOKEN)
+            await bot.delete_webhook(drop_pending_updates=True)
+            await bot.close()
+            
+            logger.info("Iniciando bot de Telegram...")
+            await application.run_polling(drop_pending_updates=True)
             
         except Exception as e:
-            logger.error(f"Error en el bot: {e}. Reconectando en 10 segundos...")
-            await asyncio.sleep(10)
+            logger.error(f"Error en el bot: {str(e)}")
+            logger.info("Reintentando en 30 segundos...")
+            time.sleep(30)  # Espera más larga para evitar flood control
 
-if __name__ == "__main__":
-    # Inicia servidor Flask
+def main():
+    # Inicia Flask en un hilo separado
     flask_thread = Thread(target=run_flask, daemon=True)
     flask_thread.start()
-    logger.info(f"Servidor Flask iniciado en puerto {PORT}")
     
-    # Inicia el bot con autoreconexión
+    # Inicia el bot en el hilo principal
     try:
         asyncio.run(run_bot())
     except KeyboardInterrupt:
         logger.info("Bot detenido manualmente")
+    except Exception as e:
+        logger.error(f"Error fatal: {str(e)}")
+
+if __name__ == "__main__":
+    main()
