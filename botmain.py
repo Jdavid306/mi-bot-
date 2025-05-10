@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Configura el token de tu bot de Telegram
-TOKEN = os.getenv("TOKEN_BOT")  # <-- Usa una variable de entorno en Render
+TOKEN = os.getenv("TELEGRAM_TOKEN")  # <-- Usa una variable de entorno en Render
 bot = telegram.Bot(token=TOKEN)
 
 # Ruta para UptimeRobot (ping cada 5 min)
